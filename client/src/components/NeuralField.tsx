@@ -39,12 +39,12 @@ type Pointer = {
 
 const settings = {
   mobile: {
-    nodes: 30,
-    reach: 120,
-    maxEdges: 3,
-    influence: 180,
-    pull: 0.1,
-    pulseChance: 0.002,
+    nodes: 25,
+    reach: 100,
+    maxEdges: 2,
+    influence: 150,
+    pull: 0.08,
+    pulseChance: 0.001,
   },
   tablet: {
     nodes: 50,
