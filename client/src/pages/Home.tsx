@@ -1,5 +1,5 @@
 /* Terminal Slate dossier: Framer petrol/amber system with a recruiter-first hero. */
-import { useMemo, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Download, ExternalLink, Github, Linkedin, Mail, MapPin, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -11,6 +11,8 @@ const navItems = [
   ["Method", "method"],
   ["Contact", "contact"],
 ] as const;
+
+const NeuralField = lazy(() => import("@/components/NeuralField"));
 
 const skillList = Object.values(skills).flat();
 const plannedCerts = certificates.filter((cert) => cert.status === "planned");
@@ -25,6 +27,15 @@ function scrollToId(id: string) {
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [filter, setFilter] = useState<"all" | "flagship" | "supporting">("all");
+  const [animationPaused, setAnimationPaused] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => setAnimationPaused(media.matches);
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
+  }, []);
 
   const visibleFlagship = useMemo(
     () => (filter === "supporting" ? [] : flagshipProjects),
@@ -37,6 +48,10 @@ export default function Home() {
 
   return (
     <div className="site-shell">
+      <div className="site-network">
+        <p className="sr-only">Decorative background animation. It can be paused with the control in the status bar.</p>
+        <Suspense fallback={null}><NeuralField paused={animationPaused} /></Suspense>
+      </div>
       <header className="topbar">
         <button className="brand-lockup" onClick={() => scrollToId("top")} aria-label="Back to top">
           <span className="brand-am" aria-hidden="true">AM</span>
@@ -56,6 +71,9 @@ export default function Home() {
       <div className="status-bar">
         <span className="live-dot" />
         <p>Seeking a 2027 PFE internship · Data Science · AI/ML Engineering · Ariana, Tunisia</p>
+        <button className="animation-toggle" type="button" aria-pressed={animationPaused} onClick={() => setAnimationPaused((paused) => !paused)}>
+          {animationPaused ? "Play animation" : "Pause animation"}
+        </button>
       </div>
 
       <main>
