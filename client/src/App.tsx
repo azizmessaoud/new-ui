@@ -10,7 +10,9 @@ import Home from "./pages/Home";
 // Vite's relative base allows this bundle to be served from either the custom
 // domain root or the GitHub Pages project subpath. Derive Wouter's base from
 // the emitted entry chunk so `/new-ui/` maps to the application's `/` route.
-const routerBase = new URL(import.meta.url).pathname.replace(/\/assets\/[^/]+$/, "/");
+const routerBase = ["/", "./"].includes(import.meta.env.BASE_URL)
+  ? ""
+  : import.meta.env.BASE_URL.replace(/\/$/, "");
 
 function Routes() {
   return (
