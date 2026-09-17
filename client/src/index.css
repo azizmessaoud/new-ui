@@ -172,6 +172,14 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--primary); outli
 .exp-desc li::before { content: ""; position: absolute; left: 2px; top: 7px; width: 5px; height: 5px; border-radius: 50%; background: #42b7ff; opacity: .7; }
 .vol-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 .vol-tags span { padding: 4px 10px; border: 1px solid rgba(157, 212, 244, .16); border-radius: 999px; color: #92b0c2; font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: .04em; }
+.vol-link { display: inline-flex; align-items: center; gap: 5px; color: #42b7ff; font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+.vol-link:hover { color: #f5fbff; }
+.planned-cert-row { margin-bottom: 28px; }
+.planned-label { margin: 0 0 10px; color: #6d8ea5; font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+.planned-cert-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.cert-item.planned { display: flex; align-items: flex-start; gap: 12px; min-height: 0; padding: 14px 16px; border: 1px dashed rgba(157, 212, 244, .28); }
+.cert-item.planned:hover { background: transparent; }
+.cert-badge { flex-shrink: 0; padding: 2px 8px; border: 1px solid rgba(157, 212, 244, .2); color: #8a9aa8; font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
 .cert-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid rgba(157, 212, 244, .14); }
 .cert-item { display: grid; grid-template-columns: 46px 1fr auto; gap: 18px; align-items: center; min-height: 105px; padding: 15px 18px 15px 0; border-bottom: 1px solid rgba(157, 212, 244, .14); color: #dcecf6; transition: background .2s ease, border-color .2s ease; }
 .cert-item:hover { background: rgba(66, 183, 255, 0.04); }
@@ -218,9 +226,10 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--primary); outli
   .approach-grid { grid-template-columns: 1fr 1fr; }
   .approach-step:nth-child(2) { border-right: 0; }
   .approach-step:nth-child(3), .approach-step:nth-child(4) { border-top: 1px solid rgba(157, 212, 244, .14); }
-  .cert-grid { grid-template-columns: 1fr; }
+  .cert-grid, .planned-cert-list { grid-template-columns: 1fr; }
   .cert-item:nth-child(odd) { border-right: 0; padding-right: 18px; }
   .cert-item:nth-child(even) { padding-left: 0; }
+  .exp-location, .vol-link { grid-column: 2; }
 }
 
 @media (max-width: 520px) {

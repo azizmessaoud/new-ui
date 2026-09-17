@@ -1,12 +1,12 @@
-/* Signal Atelier style: content stays separate from layout so future project and certificate updates are fast, consistent, and auditable. */
+/* Site content: projects, internships, volunteering, and certifications. */
 export const cvUrl = "https://drive.google.com/file/d/1CKr7-vtf9nOOr2xX-VwpJAJxefnVPbJ0/view?usp=sharing";
 
 export const profile = {
   name: "Aziz Messaoud",
   role: "Data Science Student",
-  headline: "Building practical AI systems from data, models, and software.",
-  body: "I turn data and models into useful, reliable applications—moving from exploration and evaluation to intelligent interfaces, APIs, and workflows.",
-  availability: "Currently seeking a PFE internship in Data Science, AI Engineering, ML Engineering, Agentic AI, or AI Research.",
+  headline: "Data Science Engineering student at ESPRIT, looking for a 2027 PFE internship.",
+  body: "I work on machine learning, NLP, and document pipelines — ranking, extraction, and review workflows with a baseline and a stated limit.",
+  availability: "Looking for a 2027 PFE internship in data science, ML engineering, or AI engineering.",
   email: "aziz.messaoud@esprit.tn",
   location: "Ariana, Tunisia",
   links: {
@@ -23,6 +23,7 @@ export const profile = {
 
 export interface Project {
   number: string;
+  id?: string;
   title: string;
   eyebrow: string;
   summary: string;
@@ -33,6 +34,8 @@ export interface Project {
   link: string;
   paperLink?: string;
   paperLabel?: string;
+  secondaryLabel?: string;
+  secondaryLink?: string;
   status: string;
   featured: boolean;
 }
@@ -40,43 +43,43 @@ export interface Project {
 export const projects: Project[] = [
   {
     number: "01",
+    id: "case-flyrank",
     title: "FlyRank Search Intelligence",
-    eyebrow: "Applied ML · Flagship case",
+    eyebrow: "Applied ML",
     summary: "A fixed-budget review queue for deciding which pages to inspect first using anonymized search data.",
     details: "I defined the proxy label, compared it with a transparent baseline, trained a gradient-boosted-tree model, and evaluated the top-50 review queue with Precision@50.",
     outcome: "The repository reports a Precision@50 improvement from approximately 0.24 with the baseline to approximately 0.74 with the learned ranking model.",
     tags: ["Python", "Feature engineering", "GBDT", "Precision@50", "Search"],
-    
-    linkLabel: "View code",
-    link: "https://github.com/azizmessaoud/flyrank",
-    paperLink: "https://azizmessaoud.github.io/flyrank/paper/",
-    paperLabel: "Read paper",
+    linkLabel: "Read case study",
+    link: "https://azizmessaoud.github.io/flyrank/paper/",
+    secondaryLabel: "View code",
+    secondaryLink: "https://github.com/azizmessaoud/flyrank",
     status: "Research prototype",
     featured: true,
   },
   {
     number: "02",
+    id: "case-alia",
     title: "ALIA",
-    eyebrow: "AI engineering · Flagship case",
+    eyebrow: "AI engineering",
     summary: "An AI-powered medical sales-training system with a real-time browser avatar and automated debrief generation.",
     details: "I owned the browser-based TalkingHead.js / Three.js avatar fallback and the standalone PPTX debrief agent. Note: Source code is NDA protected by Vital Laboratories Tunisia.",
     outcome: "Internal synthetic-session testing produced clean decks scoring 97–99/100 in visual QA. Real trainer deployment remains future work.",
     tags: ["Three.js", "WebSockets", "TalkingHead.js", "Python", "Groq LLM"],
-    
-    linkLabel: "Read case",
-    link: "#case-alia",
+    linkLabel: "Request details",
+    link: "mailto:aziz.messaoud@esprit.tn",
     status: "NDA Protected / Prototype",
     featured: true,
   },
   {
     number: "03",
+    id: "case-hr",
     title: "HR Document Intelligence",
-    eyebrow: "Data science · Flagship case",
+    eyebrow: "Data science",
     summary: "A local-first pipeline that extracts, normalizes, validates, and routes heterogeneous HR documents for human review.",
     details: "The system combines OCR, canonical schema mapping, deterministic business rules, confidence signals, and evidence-backed anomaly flags before downstream HR integration.",
     outcome: "A working local end-to-end prototype was demonstrated with synthetic data. OCR quality and production accuracy still require broader validation.",
     tags: ["Python", "OCR", "NLP", "FastAPI", "Validation"],
-    
     linkLabel: "View code",
     link: "https://github.com/azizmessaoud/hr-anomaly-scaffold",
     status: "Working prototype",
@@ -126,7 +129,17 @@ export const projects: Project[] = [
   },
 ];
 
-export const certificates = [
+export interface Certificate {
+  title: string;
+  issuer: string;
+  year: string;
+  link?: string;
+  status?: "earned" | "planned";
+}
+
+export const certificates: Certificate[] = [
+  { title: "Microsoft Azure AI Fundamentals (AI-900)", issuer: "Microsoft", year: "Planned", status: "planned" },
+  { title: "Microsoft Azure Data Fundamentals (DP-900)", issuer: "Microsoft", year: "Planned", status: "planned" },
   { title: "Databricks Academy Accreditation — Generative AI Fundamentals", issuer: "Databricks", year: "2026", link: "https://credentials.databricks.com/ed7432c9-7444-441d-992a-9c19e81acea9#acc.CiyAfHEW" },
   { title: "ML Engineering Internship", issuer: "FlyRank AI", year: "2026", link: "https://internship.flyrank.ai/verify/FR-D11-C2CA8-72DBB?first_name=Aziz" },
   { title: "Neo4j Fundamentals", issuer: "Neo4j", year: "2025", link: "https://graphacademy.neo4j.com/c/19de2cc3-211a-4104-b685-80e20558cc4c" },
@@ -190,28 +203,54 @@ export const experiences: { role: string; company: string; period: string; locat
   },
 ];
 
-export const volunteering = [
+export const volunteering: { org: string; period: string; role: string; summary: string; tags: string[]; link?: string; linkLabel?: string }[] = [
+  {
+    org: "Happy City Index",
+    period: "2026",
+    role: "Researcher (Tunis)",
+    summary: "I was the Tunis researcher for the 2026 Happy City Index. I gathered the city's data and checked it before it was submitted. They list some of the researchers on the Our Team page.",
+    tags: ["Urban research", "Data collection", "Quality of life"],
+    link: "https://happy-city-index.com/OurTeam",
+    linkLabel: "Our Team",
+  },
   {
     org: "DeepFlow",
     period: "Oct 2025 - Present",
     role: "Member",
-    summary: "Member of DeepFlow community dedicated to deep learning and ML innovation. Actively participating in research discussions and collaborative projects.",
+    summary: "Active participant in AI-focused workshops covering RAG systems, vector search, and agentic AI architectures. Engaged in hands-on labs and peer discussions to reinforce practical implementation skills in LLM-based agent workflows.",
     tags: ["Deep Learning", "Machine Learning", "Research"],
+    link: "https://www.linkedin.com/company/deepflowesprit/",
+    linkLabel: "LinkedIn",
   },
   {
     org: "ATIA Club ESB",
     period: "Dec 2024 - Present",
     role: "Member, Learning Department",
-    summary: "Active participant in community technical workshops and training sessions centered on artificial intelligence development. Engaged in peer-led discussions, group study activities, and hands-on exercises to reinforce practical AI implementation skills.",
+    summary: "Learning department member. I attend AI workshops and study sessions with other ESB students.",
     tags: ["AI & Technology", "Workshops", "Learning"],
   },
   {
     org: "IEEE Chapters",
     period: "Oct 2022 - Dec 2023",
     role: "Member (PES, IAS, Computer Society)",
-    summary: "Active participation in technical workshops and engineering projects. Engaged with professionals and students in advancing technology innovation.",
+    summary: "Member of the PES, IAS, and Computer Society chapters. Workshops and student engineering events, 2022–2023.",
     tags: ["IEEE", "Engineering", "Technology"],
   },
 ];
 
-export const skills = ["Python", "SQL", "scikit-learn", "PyTorch", "TensorFlow", "NLP", "LLMs", "FastAPI", "Docker", "Git", "Data visualization"];
+export const recruiter = {
+  seeking: "2027 PFE internship in data science, ML, or AI engineering",
+  education: "ESPRIT · Data Science Engineering · expected 2027",
+  proofs: [
+    { anchor: "case-flyrank", label: "FlyRank Search Intelligence", note: "Precision@50 0.24 → 0.74 vs baseline" },
+    { anchor: "case-alia", label: "ALIA", note: "NDA-protected medical sales trainer" },
+    { anchor: "case-hr", label: "HR Document Intelligence", note: "OCR + validation pipeline, local-first" },
+  ],
+};
+
+export const skills: Record<string, string[]> = {
+  "Languages": ["Python", "SQL", "R"],
+  "ML / AI": ["scikit-learn", "PyTorch", "TensorFlow", "NLP", "LLMs"],
+  "Infrastructure": ["FastAPI", "Docker", "Git"],
+  "Data": ["Data visualization"],
+};

@@ -9,10 +9,14 @@ const NeuralField = lazy(() => import("@/components/NeuralField"));
 
 const navItems = [
   ["Work", "work"],
-  ["Approach", "approach"],
+  ["Experience", "experience"],
   ["About", "about"],
   ["Contact", "contact"],
 ] as const;
+
+const skillList = Object.values(skills).flat();
+const plannedCerts = certificates.filter((cert) => cert.status === "planned");
+const earnedCerts = certificates.filter((cert) => cert.status !== "planned");
 
 function scrollToId(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -111,9 +115,9 @@ export default function Home() {
             {[['all', 'All work'], ['flagship', 'Flagship cases'], ['supporting', 'Supporting work']].map(([value, label]) => <button key={value} role="tab" aria-selected={filter === value} className={filter === value ? "active" : ""} onClick={() => setFilter(value as typeof filter)}>{label}</button>)}
           </div>
           <div className="project-list">
-            {visibleProjects.map((project, index) => <motion.article key={project.title} id={project.title === "ALIA" ? "case-alia" : project.title === "HR Document Intelligence" ? "case-hr" : undefined} className={`project-row ${index % 2 ? "reverse" : ""}`} initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.55 }}>
+            {visibleProjects.map((project, index) => <motion.article key={project.title} id={project.id} className={`project-row ${index % 2 ? "reverse" : ""}`} initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.55 }}>
               <div className={`project-art ${project.featured ? "featured-art" : "supporting-art"}`}><ProjectSwirl number={project.number} /><span className="art-index">{project.number}</span><span className="art-status">{project.status}</span>{project.featured && <span className="art-feature">FLAGSHIP EVIDENCE</span>}</div>
-              <div className="project-copy"><p className="project-eyebrow">{project.eyebrow}</p><h3>{project.title}</h3><p className="project-summary">{project.summary}</p><div className="project-meta"><div className="meta-item"><span className="mono-label">My Contribution</span><p>{project.details}</p></div><div className="meta-item"><span className="mono-label">What Came of It</span><p>{project.outcome}</p></div></div><div className="tag-row"><span className="mono-label tech-stack-label">Tech Stack:</span>{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><div className="project-links"><a className="project-link" href={project.link} target={project.link.startsWith("#") ? undefined : "_blank"} rel={project.link.startsWith("#") ? undefined : "noreferrer"}>{project.linkLabel} <ExternalLink size={15} /></a>{project.paperLink && <a className="project-link paper-link" href={project.paperLink} target="_blank" rel="noreferrer">{project.paperLabel ?? "Read paper"} <ExternalLink size={15} /></a>}</div></div>
+              <div className="project-copy"><p className="project-eyebrow">{project.eyebrow}</p><h3>{project.title}</h3><p className="project-summary">{project.summary}</p><div className="project-meta"><div className="meta-item"><span className="mono-label">My Contribution</span><p>{project.details}</p></div><div className="meta-item"><span className="mono-label">What Came of It</span><p>{project.outcome}</p></div></div><div className="tag-row"><span className="mono-label tech-stack-label">Tech Stack:</span>{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><div className="project-links"><a className="project-link" href={project.link} target={project.link.startsWith("http") ? "_blank" : undefined} rel={project.link.startsWith("http") ? "noreferrer" : undefined}>{project.linkLabel} <ExternalLink size={15} /></a>{(project.paperLink || project.secondaryLink) && <a className="project-link paper-link" href={(project.paperLink || project.secondaryLink)!} target="_blank" rel="noreferrer">{project.paperLabel ?? project.secondaryLabel ?? "Read paper"} <ExternalLink size={15} /></a>}</div></div>
             </motion.article>)}
           </div>
         </section>
@@ -134,7 +138,7 @@ export default function Home() {
     <div className="skill-panel">
       <span className="mono-label">/ WORKING TOOLKIT</span>
       <div className="skill-cloud">
-        {skills.map((skill) => <span key={skill}>{skill}</span>)}
+        {skillList.map((skill) => <span key={skill}>{skill}</span>)}
       </div>
       <div className="about-facts">
         <dl>
@@ -161,9 +165,9 @@ export default function Home() {
 </section>
 
 
-        <section id="experience" className="exp-section section-block"><div className="container"><div className="section-heading"><div><p className="section-index">05 / EXPERIENCE</p><h2>Applied expertise.</h2></div><p className="section-intro">Professional engagements focused on AI implementation, ML research, and software engineering.</p></div><div className="exp-grid">{experiences.map((exp, index) => <div className="exp-item" key={exp.company}><div className="exp-header"><span className="exp-number">0{index + 1}</span><div><h3>{exp.role}</h3><p className="exp-company">{exp.company} · {exp.period}</p></div><span className="exp-location">{exp.location}</span></div><ul className="exp-desc">{exp.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}</ul></div>)}</div></div></section>
+        <section id="experience" className="exp-section section-block"><div className="container"><div className="section-heading"><div><p className="section-index">05 / EXPERIENCE</p><h2>Applied expertise.</h2></div><p className="section-intro">Internships in HR document processing, applied ML, and IT support.</p></div><div className="exp-grid">{experiences.map((exp, index) => <div className="exp-item" key={`${exp.company}-${exp.period}`}><div className="exp-header"><span className="exp-number">0{index + 1}</span><div><h3>{exp.role}</h3><p className="exp-company">{exp.company} · {exp.period}</p></div><span className="exp-location">{exp.location}</span></div><ul className="exp-desc">{exp.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}</ul></div>)}</div></div></section>
 
-        <section id="volunteering" className="vol-section section-block"><div className="container"><div className="section-heading"><div><p className="section-index">06 / VOLUNTEERING</p><h2>🤝 Volunteering &amp; Clubs.</h2></div><p className="section-intro">Community involvement and extracurricular activities.</p></div><div className="exp-grid">{volunteering.map((item, index) => <div className="exp-item" key={item.org}><div className="exp-header"><span className="exp-number">0{index + 1}</span><div><h3>{item.org}</h3><p className="exp-company">{item.role} · {item.period}</p></div></div><p className="exp-desc">{item.summary}</p><div className="vol-tags">{item.tags.map((tag) => <span key={tag}>{tag}</span>)}</div></div>)}</div></div></section>
+        <section id="volunteering" className="vol-section section-block"><div className="container"><div className="section-heading"><div><p className="section-index">06 / VOLUNTEERING</p><h2>Volunteering.</h2></div><p className="section-intro">Research contribution, clubs, and IEEE chapters.</p></div><div className="exp-grid">{volunteering.map((item, index) => <div className="exp-item" key={item.org}><div className="exp-header"><span className="exp-number">0{index + 1}</span><div><h3>{item.org}</h3><p className="exp-company">{item.role} · {item.period}</p></div>{item.link && <a className="vol-link" href={item.link} target="_blank" rel="noreferrer">{item.linkLabel ?? "Link"} <ExternalLink size={13} /></a>}</div><p className="exp-desc">{item.summary}</p><div className="vol-tags">{item.tags.map((tag) => <span key={tag}>{tag}</span>)}</div></div>)}</div></div></section>
 
         <section id="certifications" className="cert-section section-block">
           <div className="container">
@@ -174,8 +178,22 @@ export default function Home() {
               </div>
               <p className="section-intro">A living record of the foundations supporting the work—not a substitute for the work itself.</p>
             </div>
+            <div className="planned-cert-row">
+              <p className="planned-label">Next</p>
+              <div className="planned-cert-list">
+                {plannedCerts.map((cert) => (
+                  <div className="cert-item planned" key={cert.title}>
+                    <span className="cert-badge">Planned</span>
+                    <div>
+                      <h3>{cert.title}</h3>
+                      <p>{cert.issuer}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
             <div className="cert-grid">
-              {certificates.map((cert, index) => {
+              {earnedCerts.map((cert, index) => {
                 const content = (
                   <>
                     <span className="cert-number">{String(index + 1).padStart(2, '0')}</span>
@@ -183,7 +201,7 @@ export default function Home() {
                       <h3>{cert.title}</h3>
                       <p>{cert.issuer} · {cert.year}</p>
                     </div>
-                    <ArrowUpRight size={15} />
+                    {cert.link ? <ArrowUpRight size={15} /> : null}
                   </>
                 );
 

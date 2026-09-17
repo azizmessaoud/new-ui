@@ -216,10 +216,13 @@ function vitePluginStorageProxy(): Plugin {
 }
 
 const isProduction = process.env.NODE_ENV === "production";
+// Manus-specific plugins are only useful inside the Manus cloud environment.
+// When developing locally they produce noisy /__manus__/logs 404s and are unnecessary.
+const isManusEnv = !!process.env.BUILT_IN_FORGE_API_URL;
 const plugins = [
   react(),
   tailwindcss(),
-  ...(isProduction ? [] : [vitePluginManusRuntime(), vitePluginManusDebugCollector()]),
+  ...(!isProduction && isManusEnv ? [vitePluginManusRuntime(), vitePluginManusDebugCollector()] : []),
   vitePluginStorageProxy(),
 ];
 
