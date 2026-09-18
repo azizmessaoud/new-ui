@@ -1,5 +1,5 @@
 /* Terminal Slate dossier: Framer petrol/amber system with a recruiter-first hero. */
-import { lazy, Suspense, useMemo, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Download, ExternalLink, Github, Linkedin, Mail, MapPin, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -27,6 +27,29 @@ function scrollToId(id: string) {
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [filter, setFilter] = useState<"all" | "flagship" | "supporting">("all");
+  const pendingSection = useRef<string | null>(null);
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
+  useEffect(() => {
+    if (menuOpen || !pendingSection.current) return;
+    const id = pendingSection.current;
+    pendingSection.current = null;
+    const timer = window.setTimeout(() => scrollToId(id), 30);
+    return () => window.clearTimeout(timer);
+  }, [menuOpen]);
+
+  const goToSection = (id: string) => {
+    if (menuOpen) {
+      pendingSection.current = id;
+      setMenuOpen(false);
+      return;
+    }
+    scrollToId(id);
+  };
 
   const visibleFlagship = useMemo(
     () => (filter === "supporting" ? [] : flagshipProjects),
@@ -38,19 +61,19 @@ export default function Home() {
   );
 
   return (
-    <div className="site-shell">
+    <div className={`site-shell${menuOpen ? " is-menu-open" : ""}`}>
       <div className="site-network">
         <p className="sr-only">Decorative background animation.</p>
         <Suspense fallback={null}><NeuralField /></Suspense>
       </div>
       <header className="topbar">
-        <button className="brand-lockup" onClick={() => scrollToId("top")} aria-label="Back to top">
+        <button className="brand-lockup" onClick={() => goToSection("top")} aria-label="Back to top">
           <span className="brand-am" aria-hidden="true">AM</span>
           <span className="brand-name">AZIZ MESSAOUD</span>
         </button>
         <nav className={`desktop-nav ${menuOpen ? "is-open" : ""}`} aria-label="Primary navigation">
           {navItems.map(([label, id]) => (
-            <button key={id} onClick={() => { scrollToId(id); setMenuOpen(false); }}>{label}</button>
+            <a key={id} href={`#${id}`} onClick={(event) => { event.preventDefault(); goToSection(id); }}>{label}</a>
           ))}
           <a href={cvUrl} target="_blank" rel="noreferrer" className="nav-cv">View CV <Download size={14} /></a>
         </nav>

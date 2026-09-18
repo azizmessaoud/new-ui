@@ -41,12 +41,13 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--primary); outli
 
 .site-shell { min-height: 100vh; background: transparent; position: relative; }
 .site-shell > :not(.site-network) { position: relative; z-index: 1; }
+.site-shell > .topbar { z-index: 40; }
 .site-network { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 .neural-field { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 1; }
 .site-network::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,21,33,.86) 0%, rgba(7,21,33,.38) 36%, rgba(7,21,33,.08) 62%, rgba(7,21,33,.22) 100%), linear-gradient(180deg, rgba(7,21,33,.2) 0%, transparent 28%, transparent 70%, rgba(7,21,33,.45) 100%); }
 .container { width: 100%; max-width: 1440px; margin-inline: auto; padding-inline: 32px; }
-.topbar { position: sticky; z-index: 20; top: 0; display: flex; align-items: center; justify-content: space-between; padding: 16px 32px; border-bottom: 1px solid rgba(255,255,255,.1); background: rgba(7,21,33,.88); backdrop-filter: blur(10px); }
-.brand-lockup { display: inline-flex; align-items: center; gap: 12px; border: 0; background: transparent; color: inherit; cursor: pointer; padding: 0; }
+.topbar { position: sticky; z-index: 40; top: 0; display: flex; align-items: center; justify-content: space-between; padding: 16px 32px; border-bottom: 1px solid rgba(255,255,255,.1); background: rgba(7,21,33,.94); backdrop-filter: blur(10px); }
+.brand-lockup { display: inline-flex; align-items: center; gap: 12px; border: 0; background: transparent; color: inherit; cursor: pointer; padding: 0; position: relative; z-index: 51; }
 .brand-am { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid #d5b16a; border-radius: 10px; color: #d5b16a; font-family: "Geist Mono", "JetBrains Mono", monospace; font-size: 13px; font-weight: 600; }
 .brand-name, .mono-label { font-family: "Geist Mono", "JetBrains Mono", monospace; font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
 .brand-name { color: #eff6f8; }
@@ -54,10 +55,10 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--primary); outli
 .desktop-nav button, .desktop-nav a { color: #9ab0bd; background: none; border: 0; cursor: pointer; font-family: "Geist Mono", "JetBrains Mono", monospace; font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
 .desktop-nav button:hover, .desktop-nav a:hover { color: #eff6f8; }
 .desktop-nav .nav-cv { display: inline-flex; align-items: center; gap: 8px; color: #d5b16a; }
-.menu-toggle { display: none; border: 0; background: transparent; color: #eff6f8; }
+.menu-toggle { display: none; position: relative; z-index: 50; border: 0; background: transparent; color: #eff6f8; }
 
-.status-bar { display: flex; align-items: center; gap: 12px; padding: 12px 32px; border-bottom: 1px solid rgba(255,255,255,.1); background: rgba(7,21,33,.55); }
-.status-bar p { margin: 0; color: #9ab0bd; font-family: "Geist Mono", "JetBrains Mono", monospace; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.status-bar { display: flex; align-items: flex-start; gap: 12px; padding: 12px 32px; border-bottom: 1px solid rgba(255,255,255,.1); background: rgba(7,21,33,.55); }
+.status-bar p { margin: 0; color: #9ab0bd; font-family: "Geist Mono", "JetBrains Mono", monospace; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; line-height: 1.55; }
 .live-dot { width: 8px; height: 8px; border-radius: 50%; background: #d5b16a; flex-shrink: 0; box-shadow: 0 0 10px rgba(213,177,106,.8); animation: dotPulse 2s ease-in-out infinite; }
 @keyframes dotPulse { 0%, 100% { box-shadow: 0 0 10px rgba(213,177,106,.7); } 50% { box-shadow: 0 0 18px rgba(213,177,106,1); } }
 
@@ -172,11 +173,14 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--primary); outli
 
 @media (max-width: 820px) {
   .topbar, .status-bar, .hero-section { padding-left: 20px; padding-right: 20px; }
-  .desktop-nav { display: none; position: absolute; top: 69px; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; padding: 10px 20px 18px; border-bottom: 1px solid rgba(255,255,255,.1); background: #071521; }
+  .site-shell.is-menu-open { overflow: hidden; height: 100dvh; }
+  .topbar { backdrop-filter: none; }
+  .desktop-nav { display: none; position: fixed; inset: 0; z-index: 45; flex-direction: column; justify-content: flex-start; align-items: stretch; gap: 0; padding: 88px 24px 32px; border-bottom: 0; background: #071521; overflow: auto; }
   .desktop-nav.is-open { display: flex; }
-  .desktop-nav button, .desktop-nav a { padding: 14px 0; text-align: left; }
-  .menu-toggle { display: block; }
+  .desktop-nav button, .desktop-nav a { min-height: 48px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.08); text-align: left; }
+  .menu-toggle { display: grid; place-items: center; width: 44px; height: 44px; }
   .hero-section, .section-heading, .about-grid, .contact-inner, .case-card, .proof-grid, .support-grid { grid-template-columns: 1fr; gap: 24px; }
+  .hero-section { padding-top: 48px; padding-bottom: 56px; }
   .section-block { padding-top: 72px; padding-bottom: 72px; }
   .approach-grid { grid-template-columns: 1fr 1fr; }
   .cert-grid, .planned-cert-list { grid-template-columns: 1fr; }
