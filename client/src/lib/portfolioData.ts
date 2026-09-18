@@ -5,7 +5,7 @@ export const profile = {
   name: "Aziz Messaoud",
   role: "Data Science Student",
   headline: "Data Science Engineering student at ESPRIT, looking for a 2027 PFE internship.",
-  body: "I work on machine learning, NLP, and document pipelines — ranking, extraction, and review workflows with a baseline and a stated limit.",
+  body: "I work on machine-learning projects involving documents, search, and data that is difficult to use.",
   availability: "Looking for a 2027 PFE internship in data science, ML engineering, or AI engineering.",
   email: "aziz.messaoud@esprit.tn",
   location: "Ariana, Tunisia",
@@ -28,6 +28,7 @@ export interface Project {
   eyebrow: string;
   summary: string;
   details: string;
+  lesson?: string;
   outcome: string;
   tags: string[];
   linkLabel: string;
@@ -46,9 +47,10 @@ export const projects: Project[] = [
     id: "case-flyrank",
     title: "FlyRank Search Intelligence",
     eyebrow: "Applied ML",
-    summary: "A fixed-budget review queue for deciding which pages to inspect first using anonymized search data.",
-    details: "I defined the proxy label, compared it with a transparent baseline, trained a gradient-boosted-tree model, and evaluated the top-50 review queue with Precision@50.",
-    outcome: "The repository reports a Precision@50 improvement from approximately 0.24 with the baseline to approximately 0.74 with the learned ranking model.",
+    summary: "I built a model that ranks pages for review when only a limited number can be checked.",
+    details: "I created the proxy label, compared the model with a simple baseline, and measured the results using Precision@50.",
+    lesson: "The main challenge was deciding how to define a useful proxy label when there was no direct ground truth.",
+    outcome: "Precision@50 increased from 0.24 with the baseline to 0.74 with the trained model.",
     tags: ["Python", "Feature engineering", "GBDT", "Precision@50", "Search"],
     linkLabel: "Read case study",
     link: "https://azizmessaoud.github.io/flyrank/paper/",
@@ -62,9 +64,10 @@ export const projects: Project[] = [
     id: "case-alia",
     title: "ALIA",
     eyebrow: "AI engineering",
-    summary: "An AI-powered medical sales-training system with a real-time browser avatar and automated debrief generation.",
-    details: "I owned the browser-based TalkingHead.js / Three.js avatar fallback and the standalone PPTX debrief agent. Note: Source code is NDA protected by Vital Laboratories Tunisia.",
-    outcome: "Internal synthetic-session testing produced clean decks scoring 97–99/100 in visual QA. Real trainer deployment remains future work.",
+    summary: "ALIA is a medical sales-training tool with a browser avatar and automatically generated debriefs.",
+    details: "I worked on the TalkingHead.js / Three.js avatar fallback and built the separate agent that creates the PowerPoint debrief. Source code is NDA protected by Vital Laboratories Tunisia.",
+    lesson: "The avatar fallback was necessary because browser environments did not always handle the preferred rendering path consistently.",
+    outcome: "On synthetic sessions, the generated decks scored 97–99/100 in our visual checks. The system has not yet been tested in a real trainer deployment.",
     tags: ["Three.js", "WebSockets", "TalkingHead.js", "Python", "Groq LLM"],
     linkLabel: "Request details",
     link: "mailto:aziz.messaoud@esprit.tn",
@@ -76,9 +79,10 @@ export const projects: Project[] = [
     id: "case-hr",
     title: "HR Document Intelligence",
     eyebrow: "Data science",
-    summary: "A local-first pipeline that extracts, normalizes, validates, and routes heterogeneous HR documents for human review.",
-    details: "The system combines OCR, canonical schema mapping, deterministic business rules, confidence signals, and evidence-backed anomaly flags before downstream HR integration.",
-    outcome: "A working local end-to-end prototype was demonstrated with synthetic data. OCR quality and production accuracy still require broader validation.",
+    summary: "I built a local prototype for processing HR documents.",
+    details: "It uses OCR to extract fields, maps different documents to a common structure, and flags missing or suspicious values for human review, including the source page and why a value was marked.",
+    lesson: "Scanned tables and inconsistent layouts were the main sources of OCR errors, so I kept confidence and source-page information for later review.",
+    outcome: "The prototype works end to end on synthetic documents. It still needs testing with real documents before its OCR accuracy and production reliability can be judged.",
     tags: ["Python", "OCR", "NLP", "FastAPI", "Validation"],
     linkLabel: "View code",
     link: "https://github.com/azizmessaoud/hr-anomaly-scaffold",
@@ -89,9 +93,9 @@ export const projects: Project[] = [
     number: "04",
     title: "Breast Cancer ML",
     eyebrow: "Supporting project",
-    summary: "A reproducible machine-learning proof of concept covering preprocessing, model comparison, and API scaffolding.",
-    details: "A technical project for demonstrating a full evaluation and deployment path. It is not a clinically validated diagnostic system.",
-    outcome: "A public repository documents the pipeline and implementation boundary.",
+    summary: "A small machine-learning project covering preprocessing, model comparison, and a simple API.",
+    details: "This is a technical exercise, not a clinically validated diagnostic system.",
+    outcome: "The code and evaluation steps are in a public repository.",
     tags: ["Scikit-learn", "PCA", "SVM", "MLP", "Flask", "Docker"],
     
     linkLabel: "View code",
@@ -103,8 +107,8 @@ export const projects: Project[] = [
     number: "05",
     title: "ClusterCrew Analytics",
     eyebrow: "Supporting project",
-    summary: "Interactive healthcare analytics dashboards and business-intelligence reporting.",
-    details: "A visual analytics project centered on decision-ready dashboards and clear communication of operational data.",
+    summary: "Healthcare analytics dashboards and reporting.",
+    details: "A visual analytics project for exploring operational data.",
     outcome: "Live demo available.",
     tags: ["Power BI", "Data visualization", "Healthcare BI"],
     
@@ -163,9 +167,9 @@ export const experiences: { role: string; company: string; period: string; locat
     period: "Jul 2026 - Sep 2026",
     location: "Tunis, Tunisia",
     highlights: [
-      "Building an HR anomaly detection system to validate payroll files, contracts, and employee records before integration into HR systems.",
-      "Developing a document processing pipeline using Docling and RapidOCR to extract structured data from scanned HR documents.",
-      "Implementing a FastAPI-based scaffold with validation rules and anomaly flagging for automated quality checks.",
+      "I am building tools that check payroll files, contracts, and employee records before they go into HR systems.",
+      "I extract fields from scanned HR documents with Docling and RapidOCR.",
+      "I use a FastAPI scaffold with validation rules to flag missing or suspicious values.",
     ],
   },
   {
@@ -174,9 +178,8 @@ export const experiences: { role: string; company: string; period: string; locat
     period: "Jul 2026 - Aug 2026",
     location: "Remote",
     highlights: [
-      "Completing structured assignments in applied machine learning, data analysis, experimentation, and evidence-based technical communication.",
-      "Applying machine-learning concepts through guided research, practical exercises, and project-based assignments using public or synthetic data.",
-      "Producing reproducible, Git-based portfolio deliverables through independent research, experimentation, and iterative feedback.",
+      "I completed applied machine-learning and data-analysis assignments using public and synthetic datasets.",
+      "I documented the work in Git repositories and improved the projects through feedback and repeated experiments.",
     ],
   },
   {
@@ -185,9 +188,9 @@ export const experiences: { role: string; company: string; period: string; locat
     period: "Jul 2025 - Aug 2025",
     location: "Tunis, Tunisia",
     highlights: [
-      "Developed an NLP-powered HR document-processing pipeline using Python, spaCy, and pdfplumber.",
-      "Implemented entity extraction and document parsing workflows for structured HR data.",
-      "Automated extraction for an HR document template using Python and regular expressions, enabling batch processing of documents.",
+      "I built an HR document-processing pipeline with Python, spaCy, and pdfplumber.",
+      "I extracted entities and parsed documents into structured HR fields.",
+      "I automated batch extraction for one HR document template using Python and regular expressions.",
     ],
   },
   {
@@ -217,7 +220,7 @@ export const volunteering: { org: string; period: string; role: string; summary:
     org: "DeepFlow",
     period: "Oct 2025 - Present",
     role: "Member",
-    summary: "Active participant in AI-focused workshops covering RAG systems, vector search, and agentic AI architectures. Engaged in hands-on labs and peer discussions to reinforce practical implementation skills in LLM-based agent workflows.",
+    summary: "I attend workshops and practical sessions on RAG, vector search, and LLM applications with other members.",
     tags: ["Deep Learning", "Machine Learning", "Research"],
     link: "https://www.linkedin.com/company/deepflowesprit/",
     linkLabel: "LinkedIn",
@@ -244,7 +247,7 @@ export const recruiter = {
   proofs: [
     { anchor: "case-flyrank", label: "FlyRank Search Intelligence", note: "Precision@50 0.24 → 0.74 vs baseline" },
     { anchor: "case-alia", label: "ALIA", note: "NDA-protected medical sales trainer" },
-    { anchor: "case-hr", label: "HR Document Intelligence", note: "OCR + validation pipeline, local-first" },
+    { anchor: "case-hr", label: "HR Document Intelligence", note: "OCR + validation pipeline, local prototype" },
   ],
 };
 

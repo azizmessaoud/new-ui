@@ -91,9 +91,9 @@ export default function Home() {
         <section id="top" className="hero-section container">
           <div className="hero-copy">
             <p className="section-index">01 / Identity</p>
-            <h1>I build practical AI systems from messy data.</h1>
+            <h1>I build software for data that is difficult to use.</h1>
             <p className="hero-lede">
-              Aziz Messaoud is a Data Science Engineering student at ESPRIT. Hiring managers can verify internships, three flagship cases, and a CV from this first screen.
+              I am a Data Science Engineering student at ESPRIT. My recent work includes HR document processing, search ranking, and browser-based AI tools.
             </p>
             <div className="hero-actions">
               <Button className="signal-button" asChild>
@@ -122,11 +122,11 @@ export default function Home() {
               <li><span>01</span> Data Science</li>
               <li><span>02</span> Machine Learning</li>
               <li><span>03</span> AI Engineering</li>
-              <li><span>04</span> Production systems</li>
+              <li><span>04</span> Applications</li>
             </ol>
             <div className="hero-note">
               <span className="mono-label">01</span>
-              <p>AI research is the method: hypothesis, experiment, baseline, evaluation, analysis.</p>
+              <p>I usually start with a simple question: what should the system improve, and how will I measure it?</p>
             </div>
           </aside>
         </section>
@@ -135,12 +135,12 @@ export default function Home() {
           <div className="section-heading">
             <div>
               <p className="section-index">02 / Selected work</p>
-              <h2>Proof over promises.</h2>
+              <h2>Selected work</h2>
             </div>
-            <p className="section-intro">Flagship cases show the path from data and model decisions to working systems—with stated outcomes, not inflated claims.</p>
+            <p className="section-intro">A few projects I have worked on. I have included the decisions, results, and limitations where they matter.</p>
           </div>
           <div className="filter-row" role="tablist" aria-label="Project filters">
-            {([["all", "All work"], ["flagship", "Flagship cases"], ["supporting", "Supporting work"]] as const).map(([value, label]) => (
+            {([["all", "All work"], ["flagship", "Main projects"], ["supporting", "Other projects"]] as const).map(([value, label]) => (
               <button key={value} role="tab" aria-selected={filter === value} className={filter === value ? "active" : ""} onClick={() => setFilter(value)}>{label}</button>
             ))}
           </div>
@@ -159,6 +159,7 @@ export default function Home() {
                   <p className="project-eyebrow">{project.eyebrow}</p>
                   <h3>{project.title}</h3>
                   <p className="project-summary">{project.summary} {project.details}</p>
+                  {project.lesson ? <p className="project-summary">{project.lesson}</p> : null}
                   <div className="project-links">
                     <a className="project-link" href={project.link} target={project.link.startsWith("http") ? "_blank" : undefined} rel={project.link.startsWith("http") ? "noreferrer" : undefined}>
                       {project.linkLabel} <ExternalLink size={14} />
@@ -171,7 +172,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="outcome-panel">
-                  <span className="mono-label">Measurable outcome</span>
+                  <span className="mono-label">Result</span>
                   <p>{project.outcome}</p>
                   <div className="tag-row">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
                 </div>
@@ -197,7 +198,7 @@ export default function Home() {
             <div className="section-heading">
               <div>
                 <p className="section-index">03 / Experience</p>
-                <h2>Internships, not slogans.</h2>
+                <h2>Internships</h2>
               </div>
               <p className="section-intro">HR document processing, applied ML, and IT support.</p>
             </div>
@@ -224,14 +225,14 @@ export default function Home() {
             <div className="section-heading">
               <div>
                 <p className="section-index">04 / Method</p>
-                <h2>From signal to system.</h2>
+                <h2>How I usually work</h2>
               </div>
             </div>
             <div className="approach-grid">
-              <div className="approach-step"><span>01</span><h3>Frame</h3><p>Turn an ambiguous goal into a measurable research or product question.</p></div>
-              <div className="approach-step"><span>02</span><h3>Build</h3><p>Use models, APIs, agents, and interfaces that fit the actual constraints.</p></div>
-              <div className="approach-step"><span>03</span><h3>Evaluate</h3><p>Compare against a baseline, document the metric, and make the limitation visible.</p></div>
-              <div className="approach-step"><span>04</span><h3>Explain</h3><p>Leave behind a case another person can inspect, reproduce, and challenge.</p></div>
+              <div className="approach-step"><span>01</span><h3>Ask</h3><p>What should the system improve, and how will I measure it?</p></div>
+              <div className="approach-step"><span>02</span><h3>Build</h3><p>Start with something simple enough to test against real constraints.</p></div>
+              <div className="approach-step"><span>03</span><h3>Compare</h3><p>Check the result against a baseline and write down what still fails.</p></div>
+              <div className="approach-step"><span>04</span><h3>Share</h3><p>Leave notes another person can follow, rerun, and disagree with.</p></div>
             </div>
           </div>
         </section>
@@ -240,10 +241,9 @@ export default function Home() {
           <div className="about-grid">
             <div>
               <p className="section-index">05 / About</p>
-              <h2>Curious by default. Rigorous by practice.</h2>
-              <p className="about-copy la-quote">Aziz Messaoud is a Data Science student at ESPRIT in Tunisia focused on practical AI systems, machine learning, NLP, and AI engineering.</p>
-              <p className="about-copy">I am a Computer Engineering student specializing in Data Science. My direction follows a clear progression from data science foundations and machine learning to AI engineering, production systems, and agentic workflows.</p>
-              <p className="about-copy">I am strengthening probability and statistics, algorithms, system design, microservices, and MLOps while continuing to build practical projects in NLP, generative AI, document intelligence, search intelligence, and analytics.</p>
+              <h2>About</h2>
+              <p className="about-copy">I started with data analysis and machine learning and have gradually moved toward building complete AI applications.</p>
+              <p className="about-copy">I am currently improving my foundations in statistics, algorithms, and system design. My recent projects have focused mainly on NLP, document processing, and search.</p>
             </div>
             <div className="skill-panel">
               <span className="mono-label">/ Working toolkit</span>
@@ -251,7 +251,7 @@ export default function Home() {
               <div className="about-facts">
                 <dl>
                   <div className="fact-row"><dt>Education</dt><dd>Data Science Engineering<br />ESPRIT · Expected 2027</dd></div>
-                  <div className="fact-row"><dt>Focus</dt><dd>AI Systems · ML Engineering · NLP</dd></div>
+                  <div className="fact-row"><dt>Focus</dt><dd>NLP · document processing · search</dd></div>
                   <div className="fact-row"><dt>Location</dt><dd>{profile.location}</dd></div>
                   <div className="fact-row"><dt>Languages</dt><dd>Arabic · French · English</dd></div>
                 </dl>
@@ -265,7 +265,7 @@ export default function Home() {
             <div className="section-heading">
               <div>
                 <p className="section-index">06 / Volunteering</p>
-                <h2>Research, clubs, chapters.</h2>
+                <h2>Volunteering</h2>
               </div>
               <p className="section-intro">Research contribution, clubs, and IEEE chapters.</p>
             </div>
@@ -293,9 +293,9 @@ export default function Home() {
             <div className="section-heading">
               <div>
                 <p className="section-index">07 / Certifications</p>
-                <h2>Learning, indexed.</h2>
+                <h2>Certifications</h2>
               </div>
-              <p className="section-intro">A living record of the foundations supporting the work—not a substitute for the work itself.</p>
+              <p className="section-intro">Courses I have completed, plus two I plan to take next.</p>
             </div>
             <div className="planned-cert-row">
               <p className="planned-label">Next</p>
@@ -337,10 +337,10 @@ export default function Home() {
           <div className="container contact-inner">
             <div>
               <p className="section-index">08 / Contact</p>
-              <h2>Have a real problem worth investigating?</h2>
-              <p className="contact-copy">I am looking for a PFE where I can contribute to a serious Data Science, ML engineering, AI engineering, agentic AI, or research project. Hybrid or remote.</p>
+              <h2>Get in touch</h2>
+              <p className="contact-copy">I am looking for a 2027 PFE internship in data science or machine learning. Hybrid or remote.</p>
               <Button className="signal-button hire-button" asChild>
-                <a href={`mailto:${profile.email}`}>I want to hire Aziz</a>
+                <a href={`mailto:${profile.email}`}>Email me</a>
               </Button>
             </div>
             <div className="contact-card">
