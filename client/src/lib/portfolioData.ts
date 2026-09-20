@@ -142,7 +142,7 @@ export interface Certificate {
 }
 
 export const certificates: Certificate[] = [
-  { title: "Microsoft Azure AI Fundamentals (AI-900)", issuer: "Microsoft", year: "Planned", status: "planned" },
+  { title: "Microsoft Azure AI Fundamentals (AI-901)", issuer: "Microsoft", year: "Planned", status: "planned" },
   { title: "Microsoft Azure Data Fundamentals (DP-900)", issuer: "Microsoft", year: "Planned", status: "planned" },
   { title: "Databricks Academy Accreditation — Generative AI Fundamentals", issuer: "Databricks", year: "2026", link: "https://credentials.databricks.com/ed7432c9-7444-441d-992a-9c19e81acea9#acc.CiyAfHEW" },
   { title: "ML Engineering Internship", issuer: "FlyRank AI", year: "2026", link: "https://internship.flyrank.ai/verify/FR-D11-C2CA8-72DBB?first_name=Aziz" },
