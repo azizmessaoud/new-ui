@@ -167,9 +167,9 @@ export const experiences: { role: string; company: string; period: string; locat
     period: "Jul 2026 - Sep 2026",
     location: "Tunis, Tunisia",
     highlights: [
-      "I am building tools that check payroll files, contracts, and employee records before they go into HR systems.",
-      "I extract fields from scanned HR documents with Docling and RapidOCR.",
-      "I use a FastAPI scaffold with validation rules to flag missing or suspicious values.",
+      "Built an HR anomaly-detection system to validate payroll files, contracts, and employee records before integration into HR systems.",
+      "Developed a document-processing pipeline using Docling and RapidOCR to extract structured data from scanned HR documents.",
+      "Implemented a FastAPI-based scaffold integrating validation rules and anomaly flagging for automated quality checks.",
     ],
   },
   {

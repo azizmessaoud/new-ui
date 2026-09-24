@@ -22,7 +22,7 @@ URL: https://azizm.me/
 - HR Document Intelligence: local prototype that extracts HR fields with OCR and flags missing or suspicious values.
 
 ## Professional Experience
-- AI Intern at Sopra HR Software (HR document processing and validation)
+- AI Intern at Sopra HR Software (HR anomaly detection, Docling/RapidOCR, FastAPI validation)
 - ML Intern at FlyRank AI (applied machine-learning assignments)
 
 ## Important Links
