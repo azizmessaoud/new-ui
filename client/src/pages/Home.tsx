@@ -117,6 +117,7 @@ export default function Home() {
             </p>
           </div>
           <aside className="hero-proof">
+            <img className="hero-portrait" src={`${import.meta.env.BASE_URL}portrait.jpg`} width={640} height={640} alt="Aziz Messaoud" />
             <span className="proof-label">/ Current direction</span>
             <ol className="proof-chain">
               <li><span>01</span> Data Science</li>
@@ -313,13 +314,29 @@ export default function Home() {
             </div>
             <div className="cert-grid">
               {earnedCerts.map((cert, index) => {
-                const content = (
+                const meta = (
                   <>
                     <span className="cert-number">{String(index + 1).padStart(2, "0")}</span>
                     <div>
                       <h3>{cert.title}</h3>
-                      <p>{cert.issuer} · {cert.year}</p>
+                      <p>{[cert.issuer, cert.year].filter(Boolean).join(" · ")}</p>
                     </div>
+                  </>
+                );
+                if (cert.link && cert.secondaryLink) {
+                  return (
+                    <div className="cert-item" key={cert.title}>
+                      {meta}
+                      <span className="cert-link-group">
+                        <a href={cert.link} target="_blank" rel="noreferrer">{cert.linkLabel ?? "Certificate"} <ArrowUpRight size={13} /></a>
+                        <a href={cert.secondaryLink} target="_blank" rel="noreferrer">{cert.secondaryLabel ?? "Letter"} <ArrowUpRight size={13} /></a>
+                      </span>
+                    </div>
+                  );
+                }
+                const content = (
+                  <>
+                    {meta}
                     {cert.link ? <ArrowUpRight size={15} /> : null}
                   </>
                 );

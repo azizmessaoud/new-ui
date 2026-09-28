@@ -79,6 +79,7 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--primary); outli
 .hero-internships { margin: 32px 0 0; color: #9ab0bd; font-family: "Geist Mono", "JetBrains Mono", monospace; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
 .inline-jump { border: 0; background: none; color: #d5b16a; cursor: pointer; font: inherit; text-transform: uppercase; }
 .hero-proof { height: fit-content; padding: 28px; border-radius: 11px; background: #0c2030; box-shadow: rgb(0,0,0) 0 0 0 1px inset; }
+.hero-portrait { display: block; width: 100%; aspect-ratio: 1; margin: 0 0 22px; object-fit: cover; object-position: center 18%; border-radius: 10px; }
 .proof-label { color: #d5b16a; font-family: "Geist Mono", "JetBrains Mono", monospace; font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
 .proof-chain { margin: 24px 0 0; padding: 0; list-style: none; display: grid; gap: 16px; color: #eff6f8; font-family: "Space Grotesk", sans-serif; font-size: 22px; font-weight: 500; }
 .proof-chain li { display: flex; gap: 16px; }
@@ -158,6 +159,10 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--primary); outli
 .cert-item h3 { margin: 0; font-size: 15px; font-weight: 500; }
 .cert-item p { margin: 4px 0 0; color: #9ab0bd; font-family: "Geist Mono", "JetBrains Mono", monospace; font-size: 11px; }
 .cert-item > svg { color: #9ab0bd; }
+.cert-link-group { display: inline-flex; overflow: hidden; border: 1px solid rgba(213,177,106,.4); border-radius: 8px; }
+.cert-link-group a { display: inline-flex; align-items: center; gap: 4px; padding: 7px 10px; color: #d5b16a; font-family: "Geist Mono", "JetBrains Mono", monospace; font-size: 10px; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+.cert-link-group a + a { border-left: 1px solid rgba(213,177,106,.4); }
+.cert-link-group a:hover { background: rgba(213,177,106,.12); color: #eff6f8; }
 
 .contact-section { background: rgba(12,32,48,.82); border-top: 1px solid rgba(255,255,255,.08); }
 .contact-inner { display: grid; grid-template-columns: 1fr .7fr; gap: 80px; align-items: end; }
