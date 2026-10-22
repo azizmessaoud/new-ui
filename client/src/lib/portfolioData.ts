@@ -127,6 +127,8 @@ export const projects: Project[] = [
 ];
 
 export const certificates = [
+  { title: "Microsoft Certified: Azure AI Fundamentals (AI-901)", issuer: "Microsoft", year: "2026", link: "https://learn.microsoft.com/fr-fr/users/azizmessaoud/credentials/1a2d218bd3b89433" },
+  { title: "Microsoft Certified: Azure Data Fundamentals (DP-900)", issuer: "Microsoft", year: "2026", link: "https://learn.microsoft.com/fr-fr/users/azizmessaoud/credentials/9170ffe9ad85882" },
   { title: "Databricks Academy Accreditation — Generative AI Fundamentals", issuer: "Databricks", year: "2026", link: "https://credentials.databricks.com/ed7432c9-7444-441d-992a-9c19e81acea9#acc.CiyAfHEW" },
   { title: "ML Engineering Internship", issuer: "FlyRank AI", year: "2026", link: "https://internship.flyrank.ai/verify/FR-D11-C2CA8-72DBB?first_name=Aziz" },
   { title: "Neo4j Fundamentals", issuer: "Neo4j", year: "2025", link: "https://graphacademy.neo4j.com/c/19de2cc3-211a-4104-b685-80e20558cc4c" },
